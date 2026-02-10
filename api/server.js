@@ -103,8 +103,11 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-// Fallback to index.html
+// Fallback to index.html for non-API routes
 app.get(/(.*)/, (req, res) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/api-docs')) {
+        return res.status(404).json({ error: "Not Found" });
+    }
     res.sendFile(path.join(__dirname, '../ui', 'index.html'));
 });
 

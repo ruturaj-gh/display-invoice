@@ -2,7 +2,13 @@
   "name": "display-invoice-root",
   "version": "1.0.0",
   "scripts": {
-    "start": "cd api && npm start",
-    "postinstall": "cd api && npm install"
+    "start": "node api/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "sqlite3": "^5.1.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
