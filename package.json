@@ -1,0 +1,8 @@
+{
+  "name": "display-invoice-root",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd api && npm start",
+    "postinstall": "cd api && npm install"
+  }
+}

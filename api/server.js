@@ -45,6 +45,33 @@ app.get('/api/invoice', (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/invoice/items:
+ *   post:
+ *     description: Add a new item to the invoice
+ *     consumes:
+ *       - application/json
+ *     parameters:
+ *       - in: body
+ *         name: item
+ *         description: The item to add
+ *         schema:
+ *           type: object
+ *           required:
+ *             - name
+ *             - price
+ *           properties:
+ *             name:
+ *               type: string
+ *             price:
+ *               type: number
+ *     responses:
+ *       200:
+ *         description: Item added successfully
+ *       400:
+ *         description: Invalid input
+ */
 app.post('/api/invoice/items', (req, res) => {
     const { name, price } = req.body;
     if (!name || !price) {
