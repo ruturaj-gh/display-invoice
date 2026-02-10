@@ -111,7 +111,11 @@ app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(__dirname, '../ui', 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-    console.log(`Swagger Docs available at http://localhost:${port}/api-docs`);
-});
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+        console.log(`Swagger Docs available at http://localhost:${port}/api-docs`);
+    });
+}
+
+module.exports = app;
