@@ -56,8 +56,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(data => {
                         console.log('Success:', data);
                         modal.style.display = "none";
-                        // Reload the page to show value
-                        location.reload(); 
+                        
+                        // Dynamic DOM Update (No Reload)
+                        const tableBody = document.querySelector("#invoice-container tbody");
+                        const totalRow = document.querySelector(".total-row");
+                        
+                        // Create new row
+                        const newRow = document.createElement("tr");
+                        newRow.innerHTML = `<td>${data.name}</td><td class="price">$${parseFloat(data.price).toFixed(2)}</td>`;
+                        
+                        // Insert before total row
+                        tableBody.insertBefore(newRow, totalRow);
+
+                        // Update Total
+                        const currentTotalText = totalRow.querySelector(".price").innerText.replace('$', '');
+                        const currentTotal = parseFloat(currentTotalText);
+                        const newTotal = currentTotal + parseFloat(data.price);
+                        totalRow.querySelector(".price").innerText = `$${newTotal.toFixed(2)}`;
+
+                        // Clear inputs
+                        document.getElementById("new-item-name").value = "";
+                        document.getElementById("new-item-price").value = "";
                     })
                     .catch((error) => {
                         console.error('Error:', error);
